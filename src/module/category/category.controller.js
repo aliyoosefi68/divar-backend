@@ -1,6 +1,6 @@
 const autoBind = require("auto-bind");
 const categoryService = require("./category.service");
-const  CategoryMessage  = require("./category.message");
+const CategoryMessage = require("./category.message");
 const HttpCodes = require("http-codes");
 
 class CategoryController {
@@ -25,6 +25,17 @@ class CategoryController {
       const categories = await this.#service.find();
       return res.json({
         categories,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+  async remove(req, res, next) {
+    try {
+      const { id } = req.params;
+      await this.#service.remove(id);
+      return res.json({
+        message: CategoryMessage.Deleted,
       });
     } catch (error) {
       next(error);
