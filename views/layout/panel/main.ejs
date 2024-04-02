@@ -10,6 +10,8 @@
       href="/assets/images/logos/divar.svg"
     />
     <link rel="stylesheet" href="/assets/css/styles.css" />
+    <link rel="stylesheet" href="/dist/css/mapp.min.css" />
+    <link rel="stylesheet" href="/dist/css/fa/style.css" />
   </head>
 
   <body>
@@ -37,6 +39,52 @@
         </div>
       </div>
     </div>
+    <script type="text/javascript" src="/dist/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="/dist/js/mapp.env.js"></script>
+    <script type="text/javascript" src="/dist/js/mapp.min.js"></script>
+
+    <script>
+      $(document).ready(function () {
+        const app = new Mapp({
+          element: "#map-element",
+          presets: {
+            latlng: {
+              lat: 35,
+              lng: 51,
+            },
+            zoom: 1,
+          },
+          apiKey:
+            "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjkzNTMyYmVkMTRlOWZlNzY2YmU3MWJjNTJmYTBmOTk1ZDQwNTMyZTQzNDk4YTg2N2Q1NWExY2MzY2NhNDk1MDk5YmVhZDM5ZmYxMTEzYWVlIn0.eyJhdWQiOiIyNjgwNSIsImp0aSI6IjkzNTMyYmVkMTRlOWZlNzY2YmU3MWJjNTJmYTBmOTk1ZDQwNTMyZTQzNDk4YTg2N2Q1NWExY2MzY2NhNDk1MDk5YmVhZDM5ZmYxMTEzYWVlIiwiaWF0IjoxNzExODcxNjAzLCJuYmYiOjE3MTE4NzE2MDMsImV4cCI6MTcxNDU1MDAwMywic3ViIjoiIiwic2NvcGVzIjpbImJhc2ljIl19.Ng-d-utf6u_44HZTalYzuotePudr5mZHW4T1UN6jwo-sEoUwcEjii4IpXotQVX30NmVaczSacNxLsSzlsjGX2e_ZG8sGI44KRpR1GPcqrJrjwD9cFQ72LUAxaVKAu_KMefxV4nPq5vE_G1VkwEnQqnJJWkWM8YFiFkFLYbevBSNld8FE2Ve2iRH2j7lKnpodWRTqqH8TSp12siJpqWlL_Kkk9snK4tWRPfEjjQwnB1_XrcemHk1xkSXSujLahjXk_A1l9EcNj-_8Y7cFKTNOGUFL_jWr_V9dJHwXzybp9-owrUd_splAfNn4_6dox5wHBSYJVDof1dlei9A4wQO75w",
+          gestureHandling: true,
+          gestureHandlingOptions: {
+            duration: 1200,
+            text: {
+              touch: "نقشه را با دو انگشت حرکت دهید",
+              scroll: "برای بزرگنمایی نقشه از ctrl + scroll  استفاده کنید",
+              scrollMac:
+                "برای بزرگنمایی نقشه از \u2318  + scroll  استفاده کنید",
+            },
+          },
+        });
+        app.addLayers();
+        app.map.on("click", function (e) {
+          app.addMarker({
+            name: "advanced-marker",
+            latlng: {
+              lat: e.latlng.lat,
+              lng: e.latlng.lng,
+            },
+            icon: app.icons.red,
+            popup: false,
+          });
+          let { lat, lng } = e.latlng;
+          document.getElementById("lat").value = lat;
+          document.getElementById("lng").value = lng;
+        });
+      });
+    </script>
+
     <script src="/assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/assets/js/sidebarmenu.js"></script>
