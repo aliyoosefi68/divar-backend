@@ -207,16 +207,16 @@
 :before {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  direction: rtl !important;
+  direction: rtl!important;
 }
 @media (prefers-reduced-motion: no-preference) {
   :root {
     scroll-behavior: smooth;
   }
 }
-* {
-  direction: rtl !important;
-  font-family: Vazirmatn, sans-serif;
+*{
+    direction: rtl!important;
+    font-family: Vazirmatn, sans-serif;
 }
 body {
   margin: 0;

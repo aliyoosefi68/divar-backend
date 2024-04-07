@@ -5,7 +5,6 @@
       <a href="/post/create" class="btn btn-danger">بازگشت به همه دسته ها</a>
     </div>
     <%}%>
-
     <div class="p-3">
       <%if(!options){%> <%if(categories && categories.length > 0){%>
       <ul>
@@ -24,56 +23,59 @@
         <%})%>
       </ul>
       <%}%> <%}else{%>
+      <form action="/post/create" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="lat" id="lat" />
+        <input type="hidden" name="lng" id="lng" />
+        <input
+          type="hidden"
+          name="category"
+          id="category"
+          value="<%=category%>"
+        />
+        <label class="mb-1">انتخاب آدرس</label>
+        <div id="map-element" class="w-100" style="height: 300px"></div>
 
-        <form>
-          <input type="hidden" name="lat" id="lat" />
-          <input type="hidden" name="lng" id="lng" />
-          <label class="mb-1">انتخاب آدرس</label>
-          <div id="map-element" class="w-100" style="height: 300px"></div>
-    
-          <label class="mb-1">تصاویر آگهی</label>
-          <input type="file" name="images" multiple class="form-control" />
-    
-          <label class="mt-4 mb-1">عنوان آگهی</label>
-    
-          <input
-            type="text"
-            name="title_post"
-            multiple
-            class="form-control"
-            placeholder="مثلا: خانه در تهران"
-          />
-          <label class="mt-4 mb-1">توضیحات آگهی</label>
-          <textarea
-            name=""
-            class="form-control"
-            placeholder="توضیحات آگهی"
-            cols="30"
-            rows="5"
-          ></textarea>
-          <div>
-            <%options.forEach(option => { %>
-            <label class="mt-4 mb-1"
-              ><%=option.title%><%=option.required ? " * " : "" %></label
-            >
-            <%if(option.type === "array"){%>
-            <select name="<%option.key%>" class="form-select">
-              <%option.enum.forEach( item => {%>
-              <option value="<%=item%>"><%=item%></option>
-              <%})%>
-            </select>
-            <%}else{%>
-            <input
-              type="text"
-              name="<%=option.key%>"
-              class="form-control"
-              placeholder="<%=option.guid%>"
-            />
-            <%}%> <%})%>
-          
-          </form>
-          <%}%>
-      </div>
+        <label class="mb-1">تصاویر آگهی</label>
+        <input type="file" name="images" multiple class="form-control" />
+
+        <label class="mt-4 mb-1">عنوان آگهی</label>
+
+        <input
+          type="text"
+          name="title_post"
+          class="form-control"
+          placeholder="مثلا: خانه در تهران"
+        />
+        <label class="mt-4 mb-1">توضیحات آگهی</label>
+        <textarea
+          name="description"
+          class="form-control"
+          placeholder="توضیحات آگهی"
+          cols="30"
+          rows="5"
+        ></textarea>
+
+        <%options.forEach(option => { %>
+        <label class="mt-4 mb-1"
+          ><%=option.title%><%=option.required ? " * " : "" %></label
+        >
+        <%if(option.type === "array"){%>
+        <select name="<%=option.title%>" class="form-select">
+          <%option.enum.forEach( item => {%>
+          <option value="<%=item%>"><%=item%></option>
+          <%})%>
+        </select>
+        <%}else{%>
+        <input
+          type="text"
+          name="<%=option.title%>"
+          class="form-control"
+          placeholder="<%=option.guid%>"
+        />
+        <%}%> <%})%>
+        <button type="submit" class="btn btn-danger mt-3">انتشار آگهی</button>
+      </form>
+      <%}%>
     </div>
   </div>
 </div>

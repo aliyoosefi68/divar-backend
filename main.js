@@ -6,6 +6,7 @@ const NotFoundHandler = require("./src/common/exception/notfound.handler");
 const AllExceptionHandler = require("./src/common/exception/all-exceotion.handler");
 const cookieParser = require("cookie-parser");
 const expressEjsLayouts = require("express-ejs-layouts");
+const moment = require("jalali-moment");
 dotenv.config();
 
 async function main() {
@@ -24,6 +25,10 @@ async function main() {
   app.set("layout", "./layout/panel/main.ejs");
 
   app.use(mainRouter);
+
+  //set jalali moment
+  app.locals.moment = moment;
+
   SwaggerConfig(app);
 
   NotFoundHandler(app);
