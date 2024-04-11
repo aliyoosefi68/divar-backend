@@ -3,6 +3,7 @@ const { CategoryRouter } = require("./module/category/category.routes");
 const { OptionRouter } = require("./module/option/option.routes");
 const { PostRouter } = require("./module/post/post.routes");
 const { UserRouter } = require("./module/user/user.routes");
+const postController = require("./module/post/post.controller");
 
 const mainRouter = require("express").Router();
 mainRouter.use("/auth", AuthRouter);
@@ -11,10 +12,7 @@ mainRouter.use("/category", CategoryRouter);
 mainRouter.use("/option", OptionRouter);
 mainRouter.use("/post", PostRouter);
 
-mainRouter.get("/", (req, res) => {
-  res.locals.layout = "./layout/website/main.ejs";
-  res.render("./pages/home/index.ejs");
-});
+mainRouter.get("/", postController.postList);
 mainRouter.get("/panel", (req, res) => {
   res.render("./pages/panel/dashboard.ejs");
 });

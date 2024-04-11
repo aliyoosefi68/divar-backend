@@ -1,4 +1,5 @@
 const express = require("express");
+const methodOverride = require("method-override");
 const dotenv = require("dotenv");
 const SwaggerConfig = require("./src/config/swagger.config");
 const mainRouter = require("./src/app.routes");
@@ -19,9 +20,13 @@ async function main() {
 
   app.use(express.static("public"));
 
+  app.use(methodOverride("_method"));
+
   //ejs configs
   app.use(expressEjsLayouts);
   app.set("view engine", "ejs");
+  app.set("layout extractScript", true);
+  app.set("layout extractStyles", true);
   app.set("layout", "./layout/panel/main.ejs");
 
   app.use(mainRouter);
